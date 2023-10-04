@@ -14,10 +14,17 @@ class ListArray : public List<T> {
   // numero de elemtos que tiene la lista
   static const int MINSIZE;
   // tamaño minimo del array, debe inicializarse a 2
-  
-  
 
-    public:
-        // miembros públicos, incluidos los heredados de List<T>
-    
+ public:
+  // miembros públicos, incluidos los heredados de List<T>
+  ListArray();
+  // Constructor
+  ~ListArray();
+  // Destrctor
+  T operator[](int pos);
+  // devuelve elemento de la posicion pos
+  friend std::ostream& operator<<(std::ostream &out, const ListArray<T> &list);
+  void resize(int new_size);
+  // redimensionar el array
+  
 };
