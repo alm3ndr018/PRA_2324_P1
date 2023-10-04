@@ -1,7 +1,8 @@
-#include <iostream>
-using namespace std;
+#include <ostream>
 
-public abstract class List{
+template <typename T>
+
+class List{
  public:
   //métodos
   void insert(int pos, T e);
@@ -19,6 +20,5 @@ public abstract class List{
   bool empty();
   // indica si esta vacía
   int size();
-  // devuelve el número de elementos que hay en la lista
-
+  // devuelve el número de elementos que hay en la listaº
 };
