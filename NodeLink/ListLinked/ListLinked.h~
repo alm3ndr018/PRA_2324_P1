@@ -1,0 +1,159 @@
+#include <ostream>
+#include "List.h"
+#include "Node.h"
+
+template <typename T> class ListLinked : public List<T>{
+private:
+  Node<T>* first;
+  // puntero al primer nodo
+  int n;
+  // nº de elementos que contiene la lista
+public:
+  ListLinked(){
+    first->next = nullptr;
+    n = 0;
+  }
+  // CONSTRUCTOR, inicia los dos atributos de instancia (first y nullptr)
+  ~ListLinked(){
+    Node<T> *aux = first->next;
+    Node<T> *auxNext = aux->next;
+    for(int i = 0; i < n; i++){
+      delete aux;
+      first->next = auxNext;
+      auxNext = auxNext->next;
+    }
+    n = 0;
+  }
+  // DESTRCTOR
+  T operator[](int pos){
+    Node<T> *aux = first->next;
+    if(pos >=0 && pos < n){
+      int i = 0;
+      while(i < pos){
+	aux = aux->next;
+	i++;
+      }
+      return aux->data;
+    }else
+      throw std::out_of_range("Posición inválida\n");
+  }
+  // devuelve elemento situado en la posicion pos, si no esta -> out_of_range
+  friend std::ostream& operator<<(std::ostream &out, const ListLinked<T> &list){
+    out << "List => [\n";
+    Node<T> *aux = list.first->next;
+    do{
+      out << aux->data << std::endl;
+      aux = aux->next;
+
+    }while(aux->next != nullptr);
+    out << "]";
+    return out;
+
+  }
+  // imprimir data
+
+  
+  void insert(int pos, T e) override{
+    // CAMBIAR
+    // inserta elemento e en la posicion pos
+    if(pos == 0) prepend(e);
+    if(pos == n) append(e);
+    if(pos >= 1 && pos < n){
+      Node<T> *auxNode = first->next;
+      Node<T> *auxNodePrev = first;
+      auxNode = first->next;
+      // auxNode recorre los nodos hasta la pos deseada (1 por encima)
+      // auxNodePrev va detras de el
+      for(int i = 1; i <= pos; i++){
+	auxNode = auxNode->next;
+	auxNodePrev = auxNodePrev->next;
+      }
+      n++;
+      auxNode->data = e;
+      auxNodePrev->next = auxNode;
+    }else{
+      throw std::out_of_range("Posición inválida\n");
+    }
+  }
+  void append(T e) override{
+    // CAMBIAR
+    // inserta elemento e en la ultima posicion
+  }
+  void prepend(T e) override{
+    // CAMBIAR
+    // inserta elemento e en la primera posicion
+    /*
+    if(n == 0){
+      // si array vacio
+      arr[0] = e;
+    }else{
+      // si no está vacío
+      if(n == max){
+	resize(max + 1);
+      }
+      for(int i = n; i > 0; i--){
+	arr[i] = arr[i - 1];
+	// se desplaza todo el array una casilla a la derecha
+      }
+      arr[0] = e;
+      n++;
+    }
+    */
+  }
+  T remove(int pos) override{
+    // CAMBIAR
+    // elimina y devuelve elemento de la posicion pos, si no existe lanza "std::out_of_range"
+    /*
+    if(pos >= 0 && pos < n){
+      T elemR = arr[pos];
+      for(int i = pos; i < n; i++){
+	arr[i] = arr[i + 1];
+      }
+      n--;
+      return elemR;
+    }else{
+      throw std::out_of_range("Posición inválida\n");
+    }
+    */
+  }
+  T get(int pos) override{
+    // CAMBIAR
+    // devuelve valor posicion pos, si no existe lanza "std::out_of_range"
+    Node<T> *aux = first->next;
+    if(pos >=0 && pos < n){
+      int i = 0;
+      while(i < pos){
+	aux = aux->next;
+	i++;
+      }
+      return aux->data;
+    }else
+      throw std::out_of_range("Posición inválida\n");
+  }
+  
+  int search(T e) override{
+    // CAMBIAR
+    // devuelve posicion de la primera ocurrencia del elemento e, sino existe devuelve -1
+    int pos = 0;
+    Node<T> *aux = first->next;
+    while(aux != nullptr){
+      aux = aux->next;
+      if(aux->data == e) return pos;
+      pos ++;
+    }
+    return -1;
+  }
+  bool empty() override{
+    // CAMBIAR
+    // indica si esta vacía
+    if(n == 0) return 1;
+    else return 0;
+  }
+  int size() override{
+    // CAMBIAR
+    // devuelve el número de elementos que hay en la lista
+    return n;
+  }
+  
+  
+};

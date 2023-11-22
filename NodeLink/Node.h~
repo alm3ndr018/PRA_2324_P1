@@ -1,0 +1,27 @@
+#include <ostream>
+
+template <typnename T> class Node{
+public:
+  T data;
+  // elemento almacenado
+  Node<T>* next;
+  // puntero nodo sig
+
+public:
+  Node(T data){
+    this->data = data;
+    next = nullptr;
+  }
+  Node(T data, Node<T>* next){
+    this->data = data;
+    this->next = node->next;
+
+  }
+  // contructor, next será null en caso de que no se proporcione
+  friend std::ostream& operator<<(std::ostream &out, const Node<T> &node){
+
+
+  }
+};
+  
+  

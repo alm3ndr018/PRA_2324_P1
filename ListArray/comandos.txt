@@ -1,0 +1,2 @@
+Para comprobar sintaxis de una cabecera (LisArray.h):
+g++ -fsyntax-only List.h
